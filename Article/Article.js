@@ -85,6 +85,13 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Kiran wins Javascript Coding Challenge',
+    date: 'November 4th, 2019',
+    firstParagraph: 'Kiran Congratulated by Microsoft Founder Bill Gates',
+    secondParagraph: 'Kiran To Be Named Software Developer of the Year',
+    thirdParagraph: 'Kiran To Teach Computer Science'
   }
 ];
 
@@ -112,3 +119,50 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+function createArticle (news) {
+
+  //create elements
+  const articleDiv = document.createElement('div');
+  const h2Title = document.createElement('h2');
+  const paragraphDate = document.createElement('p');
+  const paragraphOne = document.createElement('p');
+  const paragraphTwo = document.createElement('p');
+  const paragraphThree = document.createElement('p');
+  const spanButton = document.createElement('span');
+
+  //add classes
+  articleDiv.classList.add('article');
+  paragraphDate.classList.add('date');
+  spanButton.classList.add('expandButton');
+
+  //add text
+  h2Title.textContent = news.title;
+  paragraphDate.textContent = news.date;
+  paragraphOne.textContent = news.firstParagraph;
+  paragraphTwo.textContent = news.secondParagraph;
+  paragraphThree.textContent = news.thirdParagraph;
+  spanButton.textContent = 'Click \u25bc';
+
+  //append to parent div: 'articleDiv'
+  articleDiv.appendChild(h2Title);
+  articleDiv.appendChild(paragraphDate);
+  articleDiv.appendChild(paragraphOne);
+  articleDiv.appendChild(paragraphTwo);
+  articleDiv.appendChild(paragraphThree);
+  articleDiv.appendChild(spanButton);
+
+  //addEventListener to expandButton span
+  spanButton.addEventListener("click", () => {
+    articleDiv.classList.toggle('article-open');
+    //articleDiv.classList.toggle('article close');
+  });
+
+  return articleDiv;
+}
+
+data.forEach(article => {
+  const newArticle = createArticle(article);
+  const articlesAppend = document.querySelector('.articles');
+  articlesAppend.appendChild(newArticle);
+});
+
